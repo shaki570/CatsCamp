@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CatCampus</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo4.png" style="height:50px;width:auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+  
+   <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-4">
+          <li class="nav-item">
+            <a class="nav-link active text-dark" aria-current="page" href="index.html">Home</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="aboutus.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="signup.html">SignUp</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="btn btn-danger" href="rescue.html">Rescue</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="auth-page">
+<form class="p-5">
+  <h3 class="mb-4 text-center">Log In</h3>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password">
+  </div>
+  <button type="button" onclick="submitLogin()" class="btn btn-submit w-100">Log In</button>
+  <p class="text-center mt-3 mb-0">Don't have an account? <a href="signup.html">Sign Up</a></p>
+  <h2 id="outputMessage"></h2>
+</form>
+</div>
+<script>
+    function submitLogin(){
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+ 
+        if (email === "" || password === "") {
+            document.getElementById("outputMessage").innerText = "Please fill all the fields!!";
+        }
+        else{
+
+
+let users = localStorage.getItem("users");
+
+if(users == null){
+    document.getElementById("outputMessage").innerText = "No account found!";
+    return;
+}
+
+users = JSON.parse(users);
+
+let found = false;
+
+for(let i = 0; i < users.length; i++){
+
+    if(users[i].email == email && users[i].password == password){
+
+        found = true;
+
+        localStorage.setItem("currentUser", JSON.stringify(users[i]));
+
+        document.getElementById("outputMessage").innerText =
+        "Welcome back, " + users[i].name + "!";
+
+        setTimeout(function(){
+            window.location.href = "index.html";
+        },1000);
+
+        break;
+    }
+}
+
+if(found == false){
+    document.getElementById("outputMessage").innerText =
+    "Invalid Email or Password!";
+}
+
+}
+
+}
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+

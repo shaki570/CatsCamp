@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CatCampus</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo4.png" style="height:50px;width:auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+  
+   <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-4">
+          <li class="nav-item">
+            <a class="nav-link active text-dark" aria-current="page" href="index.html">Home</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="aboutus.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="signup.html">SignUp</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="btn btn-danger" href="rescue.html">Rescue</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<form class="adopt-form">
+    <div class="mb-3">
+      <label for="name2" class="form-label">Your Name</label>
+      <input type="text" class="form-control" id="name2">
+    </div>
+    <div class="mb-3">
+      <label for="locat" class="form-label">Cats Location</label>
+      <input type="text" class="form-control" id="locat">
+    </div>
+    <div class="mb-3">
+      <label for="problem" class="form-label">Problem</label>
+      <input type="text" class="form-control" id="problem">
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">Description</label>
+      <input type="text" class="form-control" id="desc">
+    </div>
+    <div class="mb-3">
+        <label for="phn" class="form-label">Your Phone</label>
+        <input type="text" class="form-control" id="phn">
+      </div>
+    <button type="button" onclick="submitForm()" class="btn btn-submit">Submit</button>
+    <h2 id="outputMessage"></h2>
+  </form>
+  <script>
+      function submitForm(){
+
+let name2 = document.getElementById("name2").value.trim();
+let locat = document.getElementById("locat").value.trim();
+let problem = document.getElementById("problem").value.trim();
+let desc = document.getElementById("desc").value.trim();
+let phn = document.getElementById("phn").value.trim();
+
+if(name2 === "" || locat === "" || problem === "" || desc === "" || phn === ""){
+
+    document.getElementById("outputMessage").innerText =
+    "Please fill all the fields!!";
+
+    return;
+}
+
+
+let rescue = {
+    name: name2,
+    location: locat,
+    problem: problem,
+    description: desc,
+    phone: phn
+};
+
+
+let rescues = localStorage.getItem("rescues");
+
+if(rescues == null){
+    rescues = [];
+}
+else{
+    rescues = JSON.parse(rescues);
+}
+
+rescues.push(rescue);
+
+localStorage.setItem("rescues", JSON.stringify(rescues));
+
+document.getElementById("outputMessage").innerText =
+"Thank you " + name2 + ", your rescue request has been submitted!";
+
+document.getElementById("name2").value = "";
+document.getElementById("locat").value = "";
+document.getElementById("problem").value = "";
+document.getElementById("desc").value = "";
+document.getElementById("phn").value = "";
+}
+  </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
