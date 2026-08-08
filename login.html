@@ -17,7 +17,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
-    <div class="container-fluid">
+    <div class="container-fluid px-0 lg-px-5">
       <a class="navbar-brand" href="index.html">
         <img src="logo4.png" style="height:50px;width:auto;">
       </a>
@@ -63,53 +63,24 @@
 </form>
 </div>
 <script>
-    function submitLogin(){
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
- 
-        if (email === "" || password === "") {
-            document.getElementById("outputMessage").innerText = "Please fill all the fields!!";
-        }
-        else{
+function submitLogin() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let savedEmail = "alphablack@gmail.com";
+    let savedPassword = "1234";
 
-
-let users = localStorage.getItem("users");
-
-if(users == null){
-    document.getElementById("outputMessage").innerText = "No account found!";
-    return;
-}
-
-users = JSON.parse(users);
-
-let found = false;
-
-for(let i = 0; i < users.length; i++){
-
-    if(users[i].email == email && users[i].password == password){
-
-        found = true;
-
-        localStorage.setItem("currentUser", JSON.stringify(users[i]));
-
-        document.getElementById("outputMessage").innerText =
-        "Welcome back, " + users[i].name + "!";
-
-        setTimeout(function(){
-            window.location.href = "index.html";
-        },1000);
-
-        break;
+    if (email === "" || password === "") {
+        document.getElementById("outputMessage").innerText = "Please fill all the fields!!";
     }
-}
-
-if(found == false){
-    document.getElementById("outputMessage").innerText =
-    "Invalid Email or Password!";
-}
-
-}
-
+    else if (email !== savedEmail) {
+        document.getElementById("outputMessage").innerText = "Email not found!";
+    }
+    else if (password !== savedPassword) {
+        document.getElementById("outputMessage").innerText = "Incorrect password!";
+    }
+    else {
+        document.getElementById("outputMessage").innerText = "Welcome back!";
+    }
 }
 </script>
 
@@ -117,8 +88,3 @@ if(found == false){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
