@@ -17,7 +17,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-0 lg-px-5">
       <a class="navbar-brand" href="index.html">
         <img src="logo4.png" style="height:50px;width:auto;">
       </a>
@@ -70,54 +70,29 @@
     <h2 id="outputMessage"></h2>
   </form>
   <script>
-      function submitForm(){
 
-let name2 = document.getElementById("name2").value.trim();
-let locat = document.getElementById("locat").value.trim();
-let problem = document.getElementById("problem").value.trim();
-let desc = document.getElementById("desc").value.trim();
-let phn = document.getElementById("phn").value.trim();
+function submitForm() {
 
-if(name2 === "" || locat === "" || problem === "" || desc === "" || phn === ""){
+    let name2 = document.getElementById("name2").value;
+    let locat = document.getElementById("locat").value;
+    let problem = document.getElementById("problem").value;
+    let desc = document.getElementById("desc").value;
+    let phn = document.getElementById("phn").value;
+
+    if (name2 === "" || locat === "" || problem === "" || desc === "" || phn === "") {
+
+        document.getElementById("outputMessage").innerText =
+            "Please fill all the fields!";
+        return;
+    }
 
     document.getElementById("outputMessage").innerText =
-    "Please fill all the fields!!";
+        "Thank you " + name2 + ", your rescue request has been submitted!";
 
-    return;
+
 }
 
 
-let rescue = {
-    name: name2,
-    location: locat,
-    problem: problem,
-    description: desc,
-    phone: phn
-};
-
-
-let rescues = localStorage.getItem("rescues");
-
-if(rescues == null){
-    rescues = [];
-}
-else{
-    rescues = JSON.parse(rescues);
-}
-
-rescues.push(rescue);
-
-localStorage.setItem("rescues", JSON.stringify(rescues));
-
-document.getElementById("outputMessage").innerText =
-"Thank you " + name2 + ", your rescue request has been submitted!";
-
-document.getElementById("name2").value = "";
-document.getElementById("locat").value = "";
-document.getElementById("problem").value = "";
-document.getElementById("desc").value = "";
-document.getElementById("phn").value = "";
-}
   </script>
 
 
